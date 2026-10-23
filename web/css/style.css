@@ -62,7 +62,7 @@ a:hover { color: var(--red); }
 button, input, select, textarea { font: inherit; color: inherit; }
 [hidden] { display: none !important; }
 ::selection { background: var(--red); color: var(--card); }
-:focus-visible { outline: 2.5px solid var(--red); outline-offset: 3px; border-radius: 4px; }
+:focus-visible { outline: 2.5px solid var(--red); outline-offset: 3px; }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -582,8 +582,8 @@ code { font-family: var(--mono); font-size: .88em; }
 .booths .none { padding: 9px 12px; font-size: 13px; color: var(--pencil); }
 @media (max-width: 899px) { .booths ul { max-height: 140px; } }
 #chat > .chat { background: var(--card); border-radius: 12px; padding: 14px 14px 8px; box-shadow: 0 0 0 1px rgba(34,29,32,.12); }
-.booth-chat .chat { min-height: 60vh; }
-.booth-chat .chat-log { max-height: 62vh; }
+.booth-chat .chat { min-height: 0; }
+.booth-chat .chat.tall .chat-log { min-height: clamp(220px, 32vh, 320px); max-height: max(320px, 58vh); }
 
 /* coupons (tickets) */
 .wallet-sum { display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); margin-bottom: 16px; }
@@ -678,3 +678,95 @@ html.rv-on .card.rv.in:hover { transform: translateY(-3px); }
 .letter .chat-top { padding-bottom: 6px; }
 .letter .chat-log { min-height: 150px; }
 .letter-head { margin-bottom: 2px; }
+
+/* =====================================================================
+   POLISH 24-10 — mobile first screen, GitHub link, states
+   ===================================================================== */
+
+/* "Open source" line under the CA row */
+.src-line { margin: -8px 0 18px; font-size: 14px; font-weight: 700; }
+.src-line a { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; text-decoration: none; color: var(--ink-2); }
+.src-line a span { text-decoration: underline; text-decoration-color: rgba(194,65,47,.55); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.src-line a:hover { color: var(--red-ink); }
+.src-line svg { width: 16px; height: 16px; flex: none; }
+
+/* nav: socials (X, Telegram, GitHub) */
+.nav .nav-soc:active, .copy:active, .soc:active { transform: translateY(1px); }
+.nav .nav-soc:focus-visible { outline-offset: 2px; }
+@media (max-width: 760px) {
+  .top { position: relative; }
+  .wordmark { min-height: 36px; }
+  .nav-socials { position: absolute; top: 15px; right: var(--gutter); gap: 6px; margin-left: 0; }
+  .nav .nav-soc { width: 34px; height: 34px; min-height: 34px; }
+  .nav { gap: 2px 18px; }
+}
+@media (max-width: 360px) {
+  .wordmark { font-size: 18px; gap: 8px; }
+  .wordmark img { width: 30px; height: 30px; }
+  .nav .nav-soc { width: 32px; height: 32px; min-height: 32px; }
+}
+
+/* mobile cover: picture → tagline → CA → trial letter → explainer + footnote */
+@media (max-width: 979px) {
+  .cover { gap: 18px; padding-top: 4px; }
+  .cover-words { display: flex; flex-direction: column; }
+  .cover-words > .tagline { order: 1; }
+  .cover-words > .ca-row { order: 2; align-self: flex-start; margin-bottom: 12px; }
+  .cover-words > .src-line { order: 3; margin: -4px 0 20px; }
+  .cover-words > .letter { order: 4; }
+  .cover-words > .hero-sub { order: 5; margin: 22px 0 10px; }
+  .cover-words > .fn { order: 6; margin-bottom: 0; }
+}
+@media (max-width: 760px) {
+  .cover-plate .plate-img { --ar: 1175 / 680; }
+  .cover-plate .plate-img img { object-position: 50% 15%; }
+  .tagline { font-size: clamp(32px, 9.4vw, 38px); margin: 0 0 14px; }
+  .ca-row { padding: 6px 8px 6px 12px; gap: 6px 8px; }
+  /* the trial letter is shorter on phones so the input sits on the first screen */
+  .letter { padding: 12px 12px 8px; }
+  .letter .chat-log { min-height: 0; max-height: 300px; padding-top: 8px; }
+  .letter .chat-empty .big { font-size: 21px; }
+  .letter .chat-empty > span:not(.big) { display: none; }  /* "no wallet" is already in the letter head */
+  .letter .chat-empty ul { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-right: -4px; padding-bottom: 2px; }
+  .letter .chat-empty ul::-webkit-scrollbar { display: none; }
+  .letter .chat-empty li { flex: none; }
+  .letter .chat-empty li button { white-space: nowrap; }
+}
+
+/* reveal: no sideways swing on narrow screens (it caused horizontal scroll) */
+@media (max-width: 899px) {
+  html.rv-on .page .plate.rv, html.rv-on .page.flip .plate.rv { transform: translateY(18px); }
+}
+
+/* sub-page heads: same rhythm everywhere, roomier text on phones */
+@media (max-width: 560px) {
+  .sheet-head { grid-template-columns: 84px 1fr; gap: 14px 16px; padding-top: 22px; }
+  .vignette { width: 84px; height: 84px; }
+  .sheet-head h1 { font-size: 34px; }
+  .sheet-head p { font-size: 15px; line-height: 1.5; }
+  .booth-head h1 { font-size: 30px; }
+}
+@media (min-width: 761px) {
+  .booth-head { padding: 30px 48px 16px; }
+  .tabs { padding: 10px 48px 0; }
+  .panel { padding: 26px 48px 38px; }
+}
+
+/* states */
+.tabs a { transition: background-color .15s ease, color .15s ease; }
+.tabs a:not([aria-selected="true"]):hover { color: var(--red-ink); background: var(--paper-2); }
+.tabs a:focus-visible { outline-offset: -3px; }
+.seg button:not([aria-pressed="true"]):hover { background: var(--paper-2); }
+.seg button:focus-visible { outline-offset: -3px; }
+.chat-empty li button:active, .preset:active, .seg button:active { transform: translateY(1px); }
+.toc a:active { transform: translateY(1px); }
+.booths li button:focus-visible { outline-offset: -3px; }
+.chat-form:focus-within .btn:focus-visible { outline-offset: 2px; }
+.btn:focus-visible { outline-offset: 3px; }
+
+/* live numbers: reserve their line so nothing jumps when they load */
+.tally .v { min-height: 1.35em; }
+.tally-foot > span:first-child { min-width: 14ch; }
+@media (max-width: 760px) { .sheet .ledger td:first-child { width: 100%; } }
+/* booth on phones: the conversation first, the list of booths under it */
+@media (max-width: 899px) { .booth-chat > #chat { order: -1; } }
