@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Docs · MUMBOOTH</title>
 <meta name="description" content="How MUMBOOTH works: RSA blind signatures (RFC 9474), the exact messages your wallet signs, the published key and fingerprint, and the API.">
-<meta name="theme-color" content="#F3EEE4">
+<meta name="theme-color" content="#F8EFDD">
 <link rel="canonical" href="https://mumbooth.chat/docs/">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
@@ -24,26 +24,30 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="roll">
-  <header class="mast">
-    <a class="wordmark" href="/" aria-label="MUMBOOTH home">
-      <img src="/assets/logo-128.png" width="26" height="26" alt="" aria-hidden="true">
-      Mumbooth
-    </a>
-    <nav class="nav" aria-label="Main">
-      <a href="/booth/">Booth</a>
-      <a href="/docs/" aria-current="page">Docs</a>
-      <a href="/privacy/">Privacy</a>
-      <a href="/proof/">Proof</a>
-      <span class="nav-socials"><a class="nav-soc" data-x hidden href="#" aria-label="MUMBOOTH on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4zm-1.2 17.9h1.9L7.1 4.2H5.1z"/></svg><span>X</span></a><a class="nav-soc" data-tg hidden href="#" aria-label="MUMBOOTH on Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.9 3.6 18.6 19.9c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6 13.4l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 2.9c.9-.3 1.7.2 1.4.7z"/></svg><span>Telegram</span></a></span>
-    </nav>
-  </header>
+<header class="top">
+  <a class="wordmark" href="/" aria-label="MUMBOOTH home">
+    <img src="/assets/logo-128.png" width="36" height="36" alt="" aria-hidden="true">
+    MUMBOOTH
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a href="/booth/">Booth</a>
+    <a href="/docs/" aria-current="page">Docs</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/proof/">Proof</a>
+    <span class="nav-socials"><a class="nav-soc" data-x hidden href="#" aria-label="MUMBOOTH on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4zm-1.2 17.9h1.9L7.1 4.2H5.1z"/></svg><span>X</span></a><a class="nav-soc" data-tg hidden href="#" aria-label="MUMBOOTH on Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.9 3.6 18.6 19.9c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6 13.4l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 2.9c.9-.3 1.7.2 1.4.7z"/></svg><span>Telegram</span></a></span>
+  </nav>
+</header>
 
+  <div class="book-wrap">
+<div class="sheet">
+  <div class="sheet-head">
+    <figure class="vignette"><img src="/assets/story/v-docs.webp" width="520" height="440" alt="The sleepy owl stamping sealed envelopes with his eyes closed" decoding="async"></figure>
+    <div><span class="kick">How the owl stamps without looking</span><h1>Docs</h1><p>Using the booth, the blind-coupon protocol, the exact messages your wallet signs, the published key, and the API.</p></div>
+  </div>
   <main id="main">
     <section class="sec">
       <div class="sec-head"><span class="no">§D1</span><span>Using the booth</span><span class="rule"></span></div>
       <div class="doc">
-        <h2>Docs</h2>
         <nav class="toc" aria-label="On this page"><a href="#use">Use</a><a href="#protocol">Protocol</a><a href="#signed">Signed messages</a><a href="#keys">Key &amp; fingerprint</a><a href="#api">API</a><a href="#token">Token rules</a><a href="#code">Code</a></nav>
         <h3 id="use">Use</h3>
         <ol>
@@ -166,13 +170,13 @@ count: &lt;K&gt;</code></pre>
       </div>
     </section>
   </main>
-
-  <div class="perf" role="presentation"></div>
-  <footer class="foot">
-    <img class="foot-mark" src="/assets/mammoth-stamp-160.webp" width="160" height="153" alt="" aria-hidden="true" loading="lazy" decoding="async">
-    <div class="thanks">Keep mum.</div>
-    <nav aria-label="Footer"><a href="/">Home</a><a href="/booth/">Booth</a><a href="/privacy/">Privacy</a><a href="/proof/">Proof</a><a data-x hidden href="#">X</a><a data-tg hidden href="#">Telegram</a><a href="https://github.com/mumbooth/mumbooth" rel="noopener">Source</a></nav>
-  </footer>
 </div>
+</div>
+<footer class="foot">
+  <svg class="orn" viewBox="0 0 120 14" aria-hidden="true"><path d="M2 7h44M74 7h44" stroke="currentColor" stroke-width="1.2"/><path d="M60 1c-4 4-8 6-12 6 4 0 8 2 12 6 4-4 8-6 12-6-4 0-8-2-12-6z" fill="currentColor"/></svg>
+  <div class="thanks">Keep mum.</div>
+  <nav aria-label="Footer"><a href="/">Home</a><a href="/booth/">Booth</a><a href="/privacy/">Privacy</a><a href="/proof/">Proof</a><a data-x hidden href="#">X</a><a data-tg hidden href="#">Telegram</a><a href="https://github.com/mumbooth/mumbooth" rel="noopener">Source</a></nav>
+  <p>No cookies, no analytics, no third-party scripts. The browser code is not minified — read it.</p>
+</footer>
 </body>
 </html>

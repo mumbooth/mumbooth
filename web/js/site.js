@@ -77,18 +77,13 @@ document.addEventListener('click', (e) => {
   if (a) e.preventDefault();
 });
 
-// Strip flash on first view (decorative).
-const strip = document.querySelector('.strip');
-if (strip && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  requestAnimationFrame(() => strip.classList.add('go'));
-}
-
 // Reveal-on-scroll (decorative). Only below-the-fold blocks are hidden, and only
 // when motion is allowed and IntersectionObserver exists; otherwise nothing changes.
+// Story pages "turn": the plate swings in from its outer edge, the words follow (CSS).
 function setupReveal() {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
-  const targets = $$('.sec:not(.hero) > .sec-head, .sec:not(.hero) > h2, .sec:not(.hero) > .doc, .sec:not(.hero) > .ledger, '
-    + '.sec:not(.hero) > .table-scroll, .sec:not(.hero) > .tally, .closing-grid, .steps > li, .cards > .card, .foot');
+  const targets = $$('.page > .plate, .page > .words, .chapter > h2, .chapter > .ledger-card, .cards > .card, '
+    + '.sec > .sec-head, .sec > .doc, .sec > .ledger, .sec > .table-scroll, .sec > .tally, .foot');
   const below = targets.filter((n) => n.getBoundingClientRect().top > innerHeight * 0.92);
   if (!below.length) return;
   document.documentElement.classList.add('rv-on');
@@ -98,7 +93,7 @@ function setupReveal() {
       e.target.classList.add('in');
       io.unobserve(e.target);
     }
-  }, { rootMargin: '0px 0px -6% 0px' });
+  }, { rootMargin: '0px 0px -8% 0px' });
   for (const n of below) { n.classList.add('rv'); io.observe(n); }
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setupReveal);
