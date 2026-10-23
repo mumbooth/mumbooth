@@ -56,7 +56,7 @@
           <tr><td>Free trial</td><td><span class="mark y">Hashed · memory only</span></td><td>The free trial counter is keyed by a daily-salted hash of your IP, held in memory and dropped at 00:00 UTC. It is a per-network counter, not an identity.</td></tr>
           <tr><td>Spent coupons</td><td><span class="mark y">Hash · key id</span></td><td>Spent coupons are stored as a hash and key id only — no time, no IP, no model.</td></tr>
           <tr><td>Timing</td><td><span class="mark n">Not prevented</span></td><td>Buying and then chatting right away can be correlated by timing. Coupons are valid until <b class="mono" data-redeem-until>the key’s end date</b>; use them later if you want distance.</td></tr>
-          <tr><td>Model provider</td><td><span class="mark y">OpenRouter → Claude</span></td><td>Chat requests go to OpenRouter with each request restricted to zero-data-retention endpoints (<code>zdr: true</code>) and provider data collection denied. We send no user field and no headers about you; we don’t forward your IP. How OpenRouter defines this: <a href="https://openrouter.ai/docs/features/zdr" rel="noopener noreferrer">Zero Data Retention</a> · <a href="https://openrouter.ai/docs/features/provider-logging" rel="noopener noreferrer">Provider logging</a>. Read their policies before sharing anything sensitive.</td></tr>
+          <tr><td>Model provider</td><td><span class="mark y">OpenRouter → Claude</span></td><td>Chat requests go to OpenRouter with each request restricted to zero-data-retention endpoints (<code>zdr: true</code>) and provider data collection denied. We send no user field and no headers about you; we don’t forward your IP. How OpenRouter defines this: <a href="https://openrouter.ai/docs/features/zdr" rel="noopener noreferrer">Zero Data Retention</a> · <a href="https://openrouter.ai/docs/guides/privacy/provider-logging" rel="noopener noreferrer">Provider logging</a>. Read their policies before sharing anything sensitive.</td></tr>
         </tbody>
       </table>
     </section>
@@ -73,10 +73,11 @@
           <li><strong>What you type.</strong> If you put your name, address or wallet into a message, OpenRouter and the model receive it. The coupon can’t un-say it.</li>
           <li><strong>Your own device.</strong> Chat history and coupons are stored in this browser as plain, readable data (IndexedDB). Anyone with access to the device and browser profile can read them. Use <a href="/booth/#forget">Forget</a> to delete them.</li>
           <li><strong>A dishonest server key.</strong> A server could try to sign some users with a different key to single them out. That’s why there is one published key and fingerprint (see <a href="/docs/#keys">/docs</a>); your browser checks every coupon against it and warns if the key ever changes.</li>
+          <li><strong>Server errors.</strong> The app never writes IPs, and web access logging is off. If the backend itself fails, the web server’s error log can record the IP of that one failed request.</li>
           <li><strong>The answer cut-off.</strong> If the model fails before the first word, the coupon is refunded. Once the first word is sent, the coupon counts as spent even if the stream breaks.</li>
         </ul>
         <h3>In your browser</h3>
-        <p>No cookies, no analytics, no third-party scripts or fonts. The page talks only to this domain. Your wallet extension talks to Robinhood Chain through its own connection.</p>
+        <p>No cookies, no analytics, no third-party scripts or fonts. The page talks only to this domain, plus the public Robinhood Chain RPC (robinhood-rpc.publicnode.com) when it asks your wallet to add the network. Your wallet extension talks to Robinhood Chain through its own connection.</p>
         <p>Connections use HTTPS. That protects the traffic between you and the server; it does not hide anything from the server itself or from the model provider.</p>
       </div>
     </section>
