@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Proof · MUMBOOTH</title>
+<meta name="description" content="Every MUMBOOTH purchase with its transaction link, the treasury on the explorer, and coupons issued and spent.">
+<meta name="theme-color" content="#F3EEE4">
+<link rel="canonical" href="https://mumbooth.chat/proof/">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MUMBOOTH">
+<meta property="og:url" content="https://mumbooth.chat/proof/">
+<meta property="og:title" content="MUMBOOTH proof — every number, checkable">
+<meta property="og:description" content="Purchases with explorer links, treasury balance from chain, coupons issued and spent.">
+<meta property="og:image" content="https://mumbooth.chat/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mumbooth.chat/og.jpg">
+<link rel="stylesheet" href="/css/style.css">
+<script type="module" src="/js/proof.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="roll">
+  <header class="mast">
+    <a class="wordmark" href="/" aria-label="MUMBOOTH home">
+      <img src="/assets/logo-128.png" width="26" height="26" alt="" aria-hidden="true">
+      Mumbooth
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="/booth/">Booth</a>
+      <a href="/docs/">Docs</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/proof/" aria-current="page">Proof</a>
+      <span class="nav-socials"><a class="nav-soc" data-x hidden href="#" aria-label="MUMBOOTH on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4zm-1.2 17.9h1.9L7.1 4.2H5.1z"/></svg><span>X</span></a><a class="nav-soc" data-tg hidden href="#" aria-label="MUMBOOTH on Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.9 3.6 18.6 19.9c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6 13.4l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 2.9c.9-.3 1.7.2 1.4.7z"/></svg><span>Telegram</span></a></span>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="sec">
+      <div class="sec-head"><span class="no">§R</span><span>Proof</span><span class="rule"></span><span class="tot" data-stat="updated">loading…</span></div>
+      <div class="doc">
+        <h2>Every number, checkable</h2>
+        <p class="lede">Purchases are public transactions; the treasury balance and burns are read straight from Robinhood Chain. Coupon counts come from the server’s database — the only numbers here you have to take on trust.</p>
+      </div>
+      <div class="tally" id="tally">
+        <div class="cell"><div class="k">Coupons issued</div><div class="v" data-stat="issued">—</div><div class="s">database</div></div>
+        <div class="cell"><div class="k">Coupons spent</div><div class="v" data-stat="spent">—</div><div class="s">database</div></div>
+        <div class="cell"><div class="k">Purchases</div><div class="v" data-stat="purchases">—</div><div class="s">public transactions</div></div>
+        <div class="cell"><div class="k">ETH received</div><div class="v" data-stat="eth">—</div><div class="s" data-stat="eth-note">treasury, read from chain</div></div>
+        <div class="cell" data-burn-cell hidden><div class="k">Tokens burned</div><div class="v" data-stat="burned">—</div><div class="s">balance of the dead address</div></div>
+      </div>
+      <dl class="kv" id="links"></dl>
+    </section>
+
+    <div class="perf" role="presentation"></div>
+
+    <section class="sec">
+      <div class="sec-head"><span class="no">§R2</span><span>Purchases</span><span class="rule"></span><span class="tot">last 100</span></div>
+      <div class="table-scroll">
+        <table class="proof-list">
+          <thead><tr><th>When (UTC)</th><th>Kind</th><th class="num">Coupons</th><th>Transaction</th></tr></thead>
+          <tbody id="purchases"><tr><td colspan="4" class="muted">Loading…</td></tr></tbody>
+        </table>
+      </div>
+      <p class="small muted" id="hold-line" data-launched hidden></p>
+      <p class="small muted">Which coupon came from which purchase is not recorded anywhere — that is the point. See <a href="/privacy/">/privacy</a>.</p>
+    </section>
+  </main>
+
+  <div class="perf" role="presentation"></div>
+  <footer class="foot">
+    <img class="foot-mark" src="/assets/mammoth-stamp-160.webp" width="160" height="153" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <div class="thanks">Keep mum.</div>
+    <nav aria-label="Footer"><a href="/">Home</a><a href="/booth/">Booth</a><a href="/docs/">Docs</a><a href="/privacy/">Privacy</a><a data-x hidden href="#">X</a><a data-tg hidden href="#">Telegram</a></nav>
+  </footer>
+</div>
+</body>
+</html>

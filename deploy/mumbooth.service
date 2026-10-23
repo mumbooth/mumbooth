@@ -1,0 +1,35 @@
+# /etc/systemd/system/mumbooth.service — MUMBOOTH API. Installed by deploy/provision.sh, which substitutes the real PORT for PORT_PLACEHOLDER.
+# Layout: /srv/mumbooth/{web,server}  ·  state /var/lib/mumbooth (0700: mumbooth.db + keys/k1.pem — LOSING keys/ KILLS EVERY COUPON; copy it to secrets/)
+# Secrets + settings: /etc/mumbooth.env (root, 0600). systemd reads it as root before dropping to the service user.
+[Unit]
+Description=MUMBOOTH server (mumbooth.chat API)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=mumbooth
+Group=mumbooth
+WorkingDirectory=/srv/mumbooth/server
+ExecStart=/usr/bin/env node index.mjs
+Environment=NODE_ENV=production
+Environment=PORT=PORT_PLACEHOLDER
+Environment=HOST=127.0.0.1
+Environment=TRUST_PROXY=1
+Environment=DATA_DIR=/var/lib/mumbooth
+Environment=TOKEN_JSON=/srv/mumbooth/web/token.json
+EnvironmentFile=/etc/mumbooth.env
+Restart=always
+RestartSec=3
+UMask=0077
+LimitNOFILE=65536
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+ReadWritePaths=/var/lib/mumbooth
+
+[Install]
+WantedBy=multi-user.target

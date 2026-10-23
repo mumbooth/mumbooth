@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Docs · MUMBOOTH</title>
+<meta name="description" content="How MUMBOOTH works: RSA blind signatures (RFC 9474), the exact messages your wallet signs, the published key and fingerprint, and the API.">
+<meta name="theme-color" content="#F3EEE4">
+<link rel="canonical" href="https://mumbooth.chat/docs/">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MUMBOOTH">
+<meta property="og:url" content="https://mumbooth.chat/docs/">
+<meta property="og:title" content="MUMBOOTH docs — the blind coupon protocol">
+<meta property="og:description" content="RSABSSA-SHA384-PSS-Deterministic, 2048-bit. The signed claim, the public key fingerprint, the API.">
+<meta property="og:image" content="https://mumbooth.chat/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mumbooth.chat/og.jpg">
+<link rel="stylesheet" href="/css/style.css">
+<script type="module" src="/js/docs.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="roll">
+  <header class="mast">
+    <a class="wordmark" href="/" aria-label="MUMBOOTH home">
+      <img src="/assets/logo-128.png" width="26" height="26" alt="" aria-hidden="true">
+      Mumbooth
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="/booth/">Booth</a>
+      <a href="/docs/" aria-current="page">Docs</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/proof/">Proof</a>
+      <span class="nav-socials"><a class="nav-soc" data-x hidden href="#" aria-label="MUMBOOTH on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4zm-1.2 17.9h1.9L7.1 4.2H5.1z"/></svg><span>X</span></a><a class="nav-soc" data-tg hidden href="#" aria-label="MUMBOOTH on Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.9 3.6 18.6 19.9c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6 13.4l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 2.9c.9-.3 1.7.2 1.4.7z"/></svg><span>Telegram</span></a></span>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="sec">
+      <div class="sec-head"><span class="no">§D1</span><span>Using the booth</span><span class="rule"></span></div>
+      <div class="doc">
+        <h2>Docs</h2>
+        <nav class="toc" aria-label="On this page"><a href="#use">Use</a><a href="#protocol">Protocol</a><a href="#signed">Signed messages</a><a href="#keys">Key &amp; fingerprint</a><a href="#api">API</a><a href="#token">Token rules</a><a href="#code">Code</a></nav>
+        <h3 id="use">Use</h3>
+        <ol>
+          <li><strong>Try it.</strong> The box on the home page gives 3 free messages a day per network, on the fast model. No wallet.</li>
+          <li><strong>Buy coupons.</strong> In <a href="/booth/#buy">Booth → Buy</a>, pick a pack and connect an injected wallet (MetaMask, Rabby, or a wallet app’s built-in browser). The page switches you to Robinhood Chain (4663), checks your balance, sends one ETH payment to the treasury and asks you to sign one claim message. <span data-price-line></span></li>
+          <li><strong>Chat.</strong> Each fast message spends 1 coupon; each deep message spends 3. The wallet is not used again.</li>
+          <li><strong>Back up.</strong> Coupons live only in this browser. Use <em>Export coupons</em> for a JSON file, <em>Import</em> to load it elsewhere. The file spends like cash.</li>
+          <li><strong>Forget.</strong> Delete one conversation or everything, any time. Our server has no copy to delete.</li>
+        </ol>
+        <p>Models: <code>fast</code> = Claude Haiku 5.5, <code>deep</code> = Claude Sonnet 5.5. Messages go through OpenRouter to Anthropic’s Claude models, each request restricted to zero-data-retention endpoints (<code>zdr: true</code>, <a href="https://openrouter.ai/docs/features/zdr" rel="noopener noreferrer">docs</a>). Conversations are sent in full with each message (the server is stateless), so long booths are trimmed from the oldest turn to fit the limits below.</p>
+      </div>
+    </section>
+
+    <div class="perf" role="presentation"></div>
+
+    <section class="sec">
+      <div class="sec-head"><span class="no">§D2</span><span>Protocol</span><span class="rule"></span></div>
+      <div class="doc">
+        <h3 id="protocol">Blind coupons, step by step</h3>
+        <p>Suite <code>RSABSSA-SHA384-PSS-Deterministic</code> from <a href="https://www.rfc-editor.org/rfc/rfc9474" rel="noopener noreferrer">RFC 9474</a>, 2048-bit modulus — the same idea as Privacy Pass. Library: <code>@cloudflare/blindrsa-ts@0.4.6</code>, on the server and (bundled, unminified) in your browser.</p>
+        <ol>
+          <li>Your browser draws N random 32-byte messages with <code>crypto.getRandomValues</code>. With that much entropy the deterministic variant is allowed by RFC 9474 — no extra randomising step needed.</li>
+          <li>It blinds each one with the published public key. Before paying, it saves <code>{msgs, inv, blinded}</code> to IndexedDB, so a reload can finish the claim.</li>
+          <li>Your wallet pays the treasury, then signs the claim text below. It binds the transaction to this exact batch, so nobody watching the chain can claim your payment.</li>
+          <li><code>POST /api/issue</code> → the server checks the tx on chain, recovers the signer (must equal <code>tx.from</code>), and blind-signs the batch. Re-claiming with the same batch returns identical signatures (deterministic RSA); a different batch for the same tx is refused.</li>
+          <li>Your browser unblinds and <strong>verifies every coupon</strong> against the key it cached. A failed check is shown, not saved.</li>
+          <li>Coupon = <code>{epoch, msg, sig}</code> (base64). To chat, the browser sends 1 or 3 coupons. The server verifies, reserves <code>sha256(msg)</code> in its spent table in one transaction, then calls the model. If the model fails before the first token, the reservation is deleted (refund). After the first token the coupon is final.</li>
+        </ol>
+        <p>The server never sees the unblinded <code>msg</code> until it is spent, and nothing in the spent coupon relates it to the blinded value it signed.</p>
+
+        <h3 id="signed">Messages your wallet signs</h3>
+        <p>Plain <code>personal_sign</code>, exact text, lowercase hex. Smart-contract wallets can’t produce a signature that recovers to the paying address, so use a regular account.</p>
+        <p class="small muted">Buying (ETH payment, or a burn once the token exists):</p>
+        <pre><code>MUMBOOTH issue v1
+chain: 4663
+tx: &lt;txHash lowercase&gt;
+batch: &lt;sha256 hex of concat(blinded bytes, in order)&gt;
+count: &lt;N&gt;</code></pre>
+        <p class="small muted">Daily holder claim (once the token exists):</p>
+        <pre><code>MUMBOOTH hold v1
+chain: 4663
+address: &lt;0x… lowercase&gt;
+day: &lt;YYYY-MM-DD UTC&gt;
+batch: &lt;sha256 hex&gt;
+count: &lt;K&gt;</code></pre>
+      </div>
+    </section>
+
+    <div class="perf" role="presentation"></div>
+
+    <section class="sec">
+      <div class="sec-head"><span class="no">§D3</span><span>Key &amp; fingerprint</span><span class="rule"></span><span class="tot">live from /api/keys</span></div>
+      <div class="doc">
+        <h3 id="keys">The signing key everyone shares</h3>
+        <p>Blind signatures only hide you if everyone gets coupons from the same key. Compare this fingerprint with the one posted on X at launch. Your browser stores it and warns if it ever changes.</p>
+        <div id="key-box"><p class="muted">Loading key…</p></div>
+        <p class="small muted">Fingerprint = <code>sha256</code> of the SPKI DER bytes. Your browser recomputes it from the key data rather than trusting the label. Check yourself: <code>base64 -d &lt;&lt;&lt; "$SPKI" | shasum -a 256</code>.</p>
+      </div>
+    </section>
+
+    <div class="perf" role="presentation"></div>
+
+    <section class="sec">
+      <div class="sec-head"><span class="no">§D4</span><span>API</span><span class="rule"></span></div>
+      <div class="doc">
+        <h3 id="api">Endpoints</h3>
+        <p>All JSON. Errors look like <code>{"error": "&lt;code&gt;", "message": "&lt;human&gt;", …detail}</code>. No CORS: the API is for this site.</p>
+      </div>
+      <div class="table-scroll">
+        <table class="spec">
+          <thead><tr><th>Endpoint</th><th>Body</th><th>Answer</th><th>Errors</th></tr></thead>
+          <tbody>
+            <tr><td><code>GET /api/status</code></td><td>–</td><td>price, treasury, counters, ETH received (from chain), token info</td><td>chain down → still 200 with <code>ethReceivedWei: null</code></td></tr>
+            <tr><td><code>GET /api/keys</code></td><td>–</td><td><code>{current, keys:[{id, alg, modulusBits, spki, fingerprint, issueUntil, redeemUntil}]}</code></td><td>–</td></tr>
+            <tr><td><code>POST /api/issue</code></td><td><code>{address, txHash, blinded[], sig}</code></td><td><code>{keyId, n, blindSigs[]}</code></td><td><code>bad_request</code> · <code>too_many_coupons</code> · <code>underpaid</code> · <code>wrong_recipient</code> · <code>unsupported_tx</code> · <code>tx_failed</code> · <code>tx_not_found</code> (pending, retry) · <code>bad_signature</code> · <code>signer_mismatch</code> · <code>tx_used</code> · <code>not_launched</code> · <code>rpc_unavailable</code> · <code>rate_limited</code></td></tr>
+            <tr><td><code>POST /api/hold/claim</code></td><td><code>{address, day, blinded[], sig}</code></td><td>same as issue</td><td><code>not_launched</code> · <code>below_minimum</code> · <code>already_claimed</code> · <code>bad_day</code> · <code>too_many_coupons</code> · <code>bad_signature</code> · <code>rpc_unavailable</code></td></tr>
+            <tr><td><code>POST /api/chat</code></td><td><code>{mode:"trial"|"coupon", model:"fast"|"deep", coupons[], messages[]}</code></td><td>SSE: <code>meta</code> → <code>delta</code>… → <code>done</code>; mid-stream <code>error {code, spent:true}</code></td><td><code>context_too_long</code> · <code>coupons_required</code> · <code>coupon_invalid</code> · <code>coupon_spent</code> · <code>key_expired</code> · <code>trial_exhausted</code> · <code>trial_paused</code> · <code>rate_limited</code> · <code>model_unavailable</code> (no coupon taken)</td></tr>
+            <tr><td><code>GET /api/proof</code></td><td>–</td><td>last 100 purchases (tx links), holder claims, issued, spent</td><td>–</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="doc">
+        <p class="small">Limits: up to 40 messages, 8k characters each; total 24k (fast) / 48k (deep) / 6k (trial). Answers up to 1,024 / 2,048 / 512 tokens. Roles alternate and end with the user. After 5 model failures in a row the server pauses chat for 60 s and answers <code>model_unavailable</code> without taking coupons.</p>
+      </div>
+    </section>
+
+    <div class="perf" role="presentation"></div>
+
+    <section class="sec">
+      <div class="sec-head"><span class="no">§D5</span><span>Token rules</span><span class="rule"></span></div>
+      <div class="doc">
+        <h3 id="token">Once the token exists</h3>
+        <p>Today, coupons are bought with ETH. The rules below apply from the moment the token’s contract address is published (it replaces <code>0x000…000</code> on the home page). Until then the server answers <code>not_launched</code>.</p>
+        <ul>
+          <li><strong>Burn for packs.</strong> Transfer tokens to <code>0x000000000000000000000000000000000000dEaD</code>. The server reads the <code>Transfer</code> log from the token contract and issues <code>floor(amount ÷ tokensPerCoupon)</code> coupons for that transaction, with the same signed claim as an ETH purchase. <span data-burn-rate></span></li>
+          <li><strong>Hold for daily coupons.</strong> A wallet holding at least the minimum balance can claim a fixed number of coupons once per UTC day by signing the hold message. No transaction, no gas. <span data-hold-rule></span></li>
+          <li><strong>Splitting a balance across many wallets</strong> to claim more is limited by the minimum: each wallet needs its own full minimum.</li>
+          <li>Holder claims are public by nature (an address and a day). The coupons they produce are blind-signed like any other.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="perf" role="presentation"></div>
+
+    <section class="sec">
+      <div class="sec-head"><span class="no">§D6</span><span>Code</span><span class="rule"></span></div>
+      <div class="doc">
+        <h3 id="code">The browser code is not minified</h3>
+        <p>Everything that runs in your browser is served as written. Read it before you trust it:</p>
+        <ul class="mono small">
+          <li><a href="/js/blind.js">/js/blind.js</a> — blinding, unblinding, verification</li>
+          <li><a href="/js/wallet.js">/js/wallet.js</a> — chain switch, payment, the exact claim text</li>
+          <li><a href="/js/coupons.js">/js/coupons.js</a> — IndexedDB: coupons, pending claims, history, key cache</li>
+          <li><a href="/js/api.js">/js/api.js</a> — every request this page makes</li>
+          <li><a href="/js/chat.js">/js/chat.js</a> — chat, coupon spending, safe text rendering</li>
+          <li><a href="/js/booth.js">/js/booth.js</a> — the booth app</li>
+          <li><a href="/js/vendor/blindrsa.js">/js/vendor/blindrsa.js</a> — <code>@cloudflare/blindrsa-ts@0.4.6</code>, bundled without minification</li>
+        </ul>
+        <p>No third-party scripts, fonts or analytics are loaded; the Content-Security-Policy only allows this domain.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="perf" role="presentation"></div>
+  <footer class="foot">
+    <img class="foot-mark" src="/assets/mammoth-stamp-160.webp" width="160" height="153" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <div class="thanks">Keep mum.</div>
+    <nav aria-label="Footer"><a href="/">Home</a><a href="/booth/">Booth</a><a href="/privacy/">Privacy</a><a href="/proof/">Proof</a><a data-x hidden href="#">X</a><a data-tg hidden href="#">Telegram</a></nav>
+  </footer>
+</div>
+</body>
+</html>

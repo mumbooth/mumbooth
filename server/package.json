@@ -1,0 +1,21 @@
+{
+  "name": "mumbooth-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MUMBOOTH API: blind-signed coupons, private AI chat.",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env index.mjs",
+    "dev": "RPC_MODE=mock MODEL_MODE=mock SERVE_WEB=1 PORT=4930 node --env-file-if-exists=.env index.mjs",
+    "test": "node --test --test-timeout=120000 tests/*.test.mjs",
+    "bundle": "node scripts/bundle-blindrsa.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.2.0",
+    "@cloudflare/blindrsa-ts": "0.4.6",
+    "fastify": "^5.0.0",
+    "viem": "^2.0.0"
+  },
+  "devDependencies": { "esbuild": "^0.25.0" }
+}

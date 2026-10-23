@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MUMBOOTH — Pay with your wallet. Chat as nobody.</title>
+<meta name="description" content="Private AI chat paid with blind coupons. Your wallet buys coupons; the server signs them blind (RSA blind signatures, RFC 9474), so it can check a coupon without knowing which wallet bought it. No account. Chats are not stored on our server.">
+<meta name="theme-color" content="#F3EEE4">
+<link rel="canonical" href="https://mumbooth.chat/">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MUMBOOTH">
+<meta property="og:url" content="https://mumbooth.chat/">
+<meta property="og:title" content="MUMBOOTH — Pay with your wallet. Chat as nobody.">
+<meta property="og:description" content="Private AI chat paid with blind-signed coupons. The server can verify a coupon, but not which wallet bought it. No account, no chat storage on our side.">
+<meta property="og:image" content="https://mumbooth.chat/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A red woolly mammoth in a black eye mask on a photo-booth ticket. Text: Pay with your wallet. Chat as nobody. mumbooth.chat">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MUMBOOTH — Pay with your wallet. Chat as nobody.">
+<meta name="twitter:description" content="Private AI chat paid with blind-signed coupons (RFC 9474). No account. Chats not stored on our server.">
+<meta name="twitter:image" content="https://mumbooth.chat/og.jpg">
+<link rel="preload" href="/assets/fonts/barlow-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/style.css">
+<script type="module" src="/js/landing.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="pleat" width="12" height="100" patternUnits="userSpaceOnUse">
+      <rect width="12" height="100" fill="#B42C25"/>
+      <rect x="0" width="4" height="100" fill="#C8322B"/>
+      <rect x="4" width="3" height="100" fill="#D9473F"/>
+      <rect x="9" width="3" height="100" fill="#8F211B"/>
+    </pattern>
+    <linearGradient id="cone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF6E6" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#FFF6E6" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="roll">
+  <header class="mast">
+    <a class="wordmark" href="/" aria-label="MUMBOOTH home">
+      <img src="/assets/logo-128.png" width="26" height="26" alt="" aria-hidden="true">
+      Mumbooth
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="/booth/">Booth</a>
+      <a href="/docs/">Docs</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/proof/">Proof</a>
+      <span class="nav-socials"><a class="nav-soc" data-x hidden href="#" aria-label="MUMBOOTH on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4zm-1.2 17.9h1.9L7.1 4.2H5.1z"/></svg><span>X</span></a><a class="nav-soc" data-tg hidden href="#" aria-label="MUMBOOTH on Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.9 3.6 18.6 19.9c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6 13.4l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 2.9c.9-.3 1.7.2 1.4.7z"/></svg><span>Telegram</span></a></span>
+    </nav>
+    <div class="mast-meta"><span>Private AI chat · paid by blind coupon</span><span>Robinhood Chain · 4663</span></div>
+  </header>
+
+  <main id="main">
+    <section class="sec hero" aria-labelledby="tagline">
+      <div class="strip-wrap">
+        <div class="strip" role="img" aria-label="A photo-booth strip: three empty frames, then a red mammoth in a black eye mask">
+          <div class="frame">
+            <svg viewBox="0 0 120 100" aria-hidden="true"><rect width="120" height="100" fill="url(#pleat)"/><rect width="120" height="5" fill="#2A1414"/><path d="M0 5h120v4H0z" fill="#000" opacity=".25"/></svg>
+            <span class="flash"></span>
+          </div>
+          <div class="frame">
+            <svg viewBox="0 0 120 100" aria-hidden="true"><rect width="120" height="100" fill="#2B1917"/><rect y="80" width="120" height="20" fill="#1C100F"/><rect x="50" y="60" width="22" height="4" rx="1.5" fill="#E9E1D2"/><path d="M53 64l-2 18M69 64l2 18M52 74h18" stroke="#E9E1D2" stroke-width="1.6" fill="none"/><rect width="44" height="100" fill="url(#pleat)"/><rect x="78" width="42" height="100" fill="url(#pleat)"/><rect width="120" height="5" fill="#2A1414"/></svg>
+            <span class="flash"></span>
+          </div>
+          <div class="frame">
+            <svg viewBox="0 0 120 100" aria-hidden="true"><rect width="120" height="100" fill="#2B1917"/><polygon points="45,0 75,0 96,82 24,82" fill="url(#cone)"/><rect y="80" width="120" height="20" fill="#1C100F"/><ellipse cx="61" cy="83" rx="17" ry="2.5" fill="#000" opacity=".35"/><rect x="50" y="60" width="22" height="4" rx="1.5" fill="#F3EEE4"/><path d="M53 64l-2 18M69 64l2 18M52 74h18" stroke="#F3EEE4" stroke-width="1.6" fill="none"/><rect width="18" height="100" fill="url(#pleat)"/><rect x="102" width="18" height="100" fill="url(#pleat)"/><rect width="120" height="5" fill="#2A1414"/></svg>
+            <span class="flash"></span>
+          </div>
+          <div class="frame frame-peek">
+            <svg viewBox="0 0 120 100" aria-hidden="true"><rect width="120" height="100" fill="#2B1917"/><polygon points="45,0 75,0 96,82 24,82" fill="url(#cone)"/><rect y="80" width="120" height="20" fill="#1C100F"/></svg>
+            <img class="peek" src="/assets/mammoth-320.webp" width="320" height="306" alt="" aria-hidden="true" decoding="async">
+            <svg class="frame-over" viewBox="0 0 120 100" preserveAspectRatio="none" aria-hidden="true"><rect width="16" height="100" fill="url(#pleat)"/><rect x="104" width="16" height="100" fill="url(#pleat)"/><rect width="120" height="5" fill="#2A1414"/></svg>
+            <span class="flash"></span>
+          </div>
+          <div class="strip-cap"><span>Mumbooth</span><span>4 frames · 0 names</span></div>
+        </div>
+        <p class="strip-note">Nobody in the picture.<br>Just a mask.</p>
+      </div>
+
+      <div class="hero-copy">
+        <h1 class="tagline" id="tagline">Pay with your wallet. Chat as <span class="nb">nobody.</span><sup><a href="#fn1" aria-label="Footnote 1">1</a></sup></h1>
+        <p class="hero-sub">Your wallet buys coupons. Your browser blinds them before the server signs, so the server can check a coupon is genuine and unused — but not which wallet bought it. One coupon, one message. No account, and no chat history on our server.</p>
+
+        <div class="ca-row">
+          <span class="ca-label">CA</span>
+          <code class="ca" data-ca-text>0x000…000</code>
+          <button class="copy" type="button" data-ca-copy>Copy</button>
+          <span class="ca-note" data-ca-note>CA at launch</span>
+          <span class="muted small" data-symbol hidden></span>
+        </div>
+
+        <div id="trial"></div>
+      </div>
+
+      <div class="tally-wrap">
+        <div class="tally" id="tally" aria-live="polite">
+          <div class="cell"><div class="k">Coupons issued</div><div class="v" data-stat="issued">—</div><div class="s">blind-signed, all time</div></div>
+          <div class="cell"><div class="k">Coupons spent</div><div class="v" data-stat="spent">—</div><div class="s">one per fast message</div></div>
+          <div class="cell"><div class="k">Purchases</div><div class="v" data-stat="purchases">—</div><div class="s">public transactions</div></div>
+          <div class="cell"><div class="k">ETH received</div><div class="v" data-stat="eth">—</div><div class="s" data-stat="eth-note">treasury, read from chain</div></div>
+          <div class="cell" data-burn-cell hidden><div class="k">Tokens burned</div><div class="v" data-stat="burned">—</div><div class="s">balance of the dead address</div></div>
+        </div>
+        <div class="tally-foot"><span data-stat="updated">Loading live numbers…</span><a href="/proof/">Check every number →</a></div>
+        <p class="footnote" id="fn1"><span class="fn-no">1</span> “Nobody” = no account, no name, and a wallet the server can’t tie to your chat. Not: no IP. See <a href="/privacy/">/privacy</a>.</p>
+      </div>
+    </section>
+
+    <div class="perf" role="presentation"></div>
+
+    <section class="sec" aria-labelledby="how-h">
+      <div class="sec-head"><span class="no">§02</span><span>How the booth works</span><span class="rule"></span><span class="tot">4 steps</span></div>
+      <h2 id="how-h">One payment. One blind stamp.<br>Then the wallet leaves.</h2>
+      <ol class="steps how">
+        <li>
+          <svg class="step-art" viewBox="0 0 200 120" aria-hidden="true">
+            <rect x="34" y="28" width="110" height="70" rx="6" fill="#17161A"/>
+            <rect x="34" y="28" width="110" height="16" rx="6" fill="#3A3833"/>
+            <rect x="112" y="54" width="44" height="26" rx="4" fill="#F3EEE4" stroke="#17161A" stroke-width="3"/>
+            <circle cx="128" cy="67" r="5" fill="#C8322B"/>
+            <path d="M160 67h26m-8-7 8 7-8 7" stroke="#C8322B" stroke-width="3" fill="none"/>
+            <text x="34" y="116" font-family="IBM Plex Mono, monospace" font-size="11" fill="#8A857C">tx → treasury</text>
+          </svg>
+          <h3>Pay</h3>
+          <p>Your wallet sends ETH to the treasury on Robinhood Chain. That transaction is public, like any other.</p>
+        </li>
+        <li>
+          <svg class="step-art" viewBox="0 0 200 120" aria-hidden="true">
+            <g transform="rotate(-6 70 60)"><rect x="22" y="34" width="96" height="48" fill="#F3EEE4" stroke="#17161A" stroke-width="3"/><path d="M44 36v44" stroke="#8A857C" stroke-width="2" stroke-dasharray="4 3"/><text x="54" y="64" font-family="IBM Plex Mono, monospace" font-size="12" fill="#17161A">a7f3…</text></g>
+            <g><rect x="74" y="30" width="104" height="62" fill="#17161A"/><path d="M74 30l52 34 52-34" stroke="#F3EEE4" stroke-width="2.5" fill="none"/><path d="M84 84h84M84 78h60" stroke="#3A3833" stroke-width="3"/></g>
+            <text x="22" y="116" font-family="IBM Plex Mono, monospace" font-size="11" fill="#8A857C">random → blinded</text>
+          </svg>
+          <h3>Blind</h3>
+          <p>Your browser makes random coupons and seals each one in a mathematical envelope. The server only ever sees the envelopes.</p>
+        </li>
+        <li>
+          <svg class="step-art" viewBox="0 0 200 120" aria-hidden="true">
+            <rect x="40" y="58" width="110" height="40" fill="#17161A"/>
+            <path d="M40 58l55 24 55-24" stroke="#F3EEE4" stroke-width="2.5" fill="none"/>
+            <rect x="80" y="8" width="30" height="24" rx="3" fill="#3A3833"/>
+            <rect x="72" y="30" width="46" height="10" rx="2" fill="#17161A"/>
+            <circle cx="122" cy="78" r="17" fill="none" stroke="#C8322B" stroke-width="3.5"/>
+            <text x="122" y="82" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="11" fill="#C8322B">SIGNED</text>
+            <text x="40" y="116" font-family="IBM Plex Mono, monospace" font-size="11" fill="#8A857C">RFC 9474 · RSA-2048</text>
+          </svg>
+          <h3>Stamp</h3>
+          <p>The server checks the payment, then signs the sealed envelopes without opening them. Your browser unseals and verifies every signature against the published key.</p>
+        </li>
+        <li>
+          <svg class="step-art" viewBox="0 0 200 120" aria-hidden="true">
+            <rect x="26" y="30" width="130" height="58" fill="#F3EEE4" stroke="#17161A" stroke-width="3"/>
+            <path d="M50 32v54" stroke="#8A857C" stroke-width="2" stroke-dasharray="4 3"/>
+            <image href="/assets/mammoth-ink-96.webp" x="29" y="50" width="19" height="18" opacity=".85"/>
+            <circle cx="132" cy="59" r="9" fill="#D6CDBD" stroke="#17161A" stroke-width="2.5"/>
+            <g transform="rotate(-12 96 58)"><rect x="66" y="46" width="52" height="22" fill="none" stroke="#C8322B" stroke-width="3"/><text x="92" y="63" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="15" fill="#C8322B">SPENT</text></g>
+            <text x="26" y="116" font-family="IBM Plex Mono, monospace" font-size="11" fill="#8A857C">1 coupon = 1 message</text>
+          </svg>
+          <h3>Punch</h3>
+          <p>Each message spends a coupon. The server sees a valid, unused coupon — not the wallet that bought it. The wallet is not asked for anything again.</p>
+        </li>
+      </ol>
+    </section>
+
+    <div class="perf" role="presentation"></div>
+
+    <section class="sec" aria-labelledby="see-h">
+      <div class="sec-head"><span class="no">§03</span><span>What we see</span><span class="rule"></span><span class="tot">itemised</span></div>
+      <h2 id="see-h">What the server sees.<br>What it can’t.</h2>
+      <table class="ledger">
+        <thead><tr><th scope="col">Item</th><th scope="col">Server</th><th scope="col">In plain words</th></tr></thead>
+        <tbody>
+          <tr><td>Your purchase</td><td><span class="mark y">Seen · stored</span></td><td>Buying coupons is a public transaction. We store the tx hash, wallet, and coupon count — the same data anyone can read on the explorer.</td></tr>
+          <tr><td>Which coupon is whose</td><td><span class="mark n">Can’t tell</span></td><td>We sign coupons blind (RSA blind signatures, RFC 9474). The server cannot tell which wallet a coupon came from — among the <b class="mono" data-n-issued>N</b> coupons issued with the current key.</td></tr>
+          <tr><td>Your messages</td><td><span class="mark y">Passed through · not stored</span></td><td>We forward your message through OpenRouter to Anthropic’s Claude models and stream the answer back. Every request is restricted to zero-data-retention endpoints (OpenRouter <code>zdr: true</code>, docs: <a href="https://openrouter.ai/docs/features/zdr" rel="noopener noreferrer">https://openrouter.ai/docs/features/zdr</a>). We do not store messages, answers, or conversation history.</td></tr>
+          <tr><td>Your IP address</td><td><span class="mark y">Visible · not logged</span></td><td>Access logging is off for all /api routes and the app never writes IPs. Your IP is still visible to the server at the network level — use a VPN or Tor if that matters to you.</td></tr>
+          <tr><td>Spent coupons</td><td><span class="mark y">Hash · key id</span></td><td>Spent coupons are stored as a hash and key id only — no time, no IP, no model.</td></tr>
+          <tr><td>Timing</td><td><span class="mark n">Not prevented</span></td><td>Buying and then chatting right away can be correlated by timing. Coupons are valid until <b class="mono" data-redeem-until>the key’s end date</b>; use them later if you want distance.</td></tr>
+        </tbody>
+      </table>
+      <p class="small muted">Full list, including the free trial counter and the model provider: <a href="/privacy/">/privacy</a>.</p>
+    </section>
+
+    <div class="perf" role="presentation"></div>
+
+    <section class="sec" aria-labelledby="get-h">
+      <div class="sec-head"><span class="no">§04</span><span>Coupons</span><span class="rule"></span><span class="tot">3 ways</span></div>
+      <h2 id="get-h">Three ways to fill the booth</h2>
+      <div class="cards">
+        <article class="card">
+          <img class="card-mark" src="/assets/mammoth-stamp-160.webp" width="160" height="153" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          <span class="tag live">Live now</span>
+          <h3>Buy with ETH</h3>
+          <p>Send ETH on Robinhood Chain, get a pack of blind coupons. <span data-price-line>One coupon pays for one fast message; a deep message takes three.</span></p>
+        </article>
+        <article class="card">
+          <img class="card-mark" src="/assets/mammoth-stamp-160.webp" width="160" height="153" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          <span class="tag later">Once the token exists</span>
+          <h3>Burn for packs</h3>
+          <p>Send tokens to the dead address. The server reads the burn on chain and signs a pack of coupons the same blind way. The rate is set when the token goes live.</p>
+        </article>
+        <article class="card">
+          <img class="card-mark" src="/assets/mammoth-stamp-160.webp" width="160" height="153" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          <span class="tag later">Once the token exists</span>
+          <h3>Hold for daily coupons</h3>
+          <p>Wallets holding the minimum balance can claim a few coupons each UTC day. Still blind-signed: the claim is public, the chats are not tied to it.</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="perf" role="presentation"></div>
+
+    <section class="sec closing" aria-labelledby="close-h">
+      <div class="sec-head"><span class="no">§05</span><span>The regular</span><span class="rule"></span><span class="tot">1 mask</span></div>
+      <div class="closing-grid">
+        <div class="closing-art">
+          <img src="/assets/mammoth-640.webp" srcset="/assets/mammoth-320.webp 320w, /assets/mammoth-640.webp 640w" sizes="(min-width: 900px) 360px, 70vw" width="640" height="611" alt="The MUMBOOTH mascot: a red woolly mammoth wearing a black eye mask" loading="lazy" decoding="async">
+          <span class="closing-tag">Booth regular · name withheld</span>
+        </div>
+        <div class="closing-copy">
+          <h2 id="close-h">The only one in the booth wears a mask.</h2>
+          <p class="closing-sub">No account. No name. A wallet the server can’t tie to your chat. Three free messages a day on this page, then one coupon per message.</p>
+          <div class="cta-row">
+            <a class="btn red" href="/booth/">Open the booth →</a>
+            <a class="btn ghost-light" href="#trial">Try it free ↑</a>
+            <a class="btn ghost-light" data-pons aria-disabled="true">Buy on Pons — link at launch</a>
+          </div>
+          <div class="social-row">
+            <a class="soc" data-x hidden href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4zm-1.2 17.9h1.9L7.1 4.2H5.1z"/></svg><span>Follow on X</span></a>
+            <a class="soc" data-tg hidden href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.9 3.6 18.6 19.9c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6 13.4l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 2.9c.9-.3 1.7.2 1.4.7z"/></svg><span>Join Telegram</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="perf" role="presentation"></div>
+
+  <footer class="foot">
+    <img class="foot-mark" src="/assets/mammoth-stamp-160.webp" width="160" height="153" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <div class="thanks">Keep mum.</div>
+    <svg class="barcode" viewBox="0 0 220 38" aria-hidden="true" preserveAspectRatio="none"><g fill="#17161A"><rect x="0" width="3" height="38"/><rect x="5" width="1" height="38"/><rect x="8" width="2" height="38"/><rect x="13" width="4" height="38"/><rect x="19" width="1" height="38"/><rect x="22" width="3" height="38"/><rect x="27" width="1" height="38"/><rect x="30" width="2" height="38"/><rect x="35" width="1" height="38"/><rect x="38" width="4" height="38"/><rect x="44" width="2" height="38"/><rect x="48" width="1" height="38"/><rect x="51" width="3" height="38"/><rect x="57" width="1" height="38"/><rect x="60" width="2" height="38"/><rect x="64" width="4" height="38"/><rect x="70" width="1" height="38"/><rect x="73" width="2" height="38"/><rect x="78" width="3" height="38"/><rect x="83" width="1" height="38"/><rect x="86" width="1" height="38"/><rect x="89" width="4" height="38"/><rect x="95" width="2" height="38"/><rect x="99" width="1" height="38"/><rect x="102" width="3" height="38"/><rect x="108" width="1" height="38"/><rect x="111" width="2" height="38"/><rect x="115" width="4" height="38"/><rect x="121" width="1" height="38"/><rect x="124" width="3" height="38"/><rect x="129" width="1" height="38"/><rect x="132" width="2" height="38"/><rect x="137" width="1" height="38"/><rect x="140" width="4" height="38"/><rect x="146" width="2" height="38"/><rect x="150" width="1" height="38"/><rect x="153" width="3" height="38"/><rect x="158" width="1" height="38"/><rect x="161" width="2" height="38"/><rect x="166" width="4" height="38"/><rect x="172" width="1" height="38"/><rect x="175" width="2" height="38"/><rect x="179" width="3" height="38"/><rect x="185" width="1" height="38"/><rect x="188" width="2" height="38"/><rect x="192" width="4" height="38"/><rect x="198" width="1" height="38"/><rect x="201" width="3" height="38"/><rect x="206" width="1" height="38"/><rect x="209" width="2" height="38"/><rect x="214" width="1" height="38"/><rect x="217" width="3" height="38"/></g></svg>
+    <nav aria-label="Footer">
+      <a href="/booth/">Booth</a><a href="/docs/">Docs</a><a href="/privacy/">Privacy</a><a href="/proof/">Proof</a><a data-x hidden href="#">X</a><a data-tg hidden href="#">Telegram</a>
+    </nav>
+    <p>No cookies, no analytics, no third-party scripts. The browser code is not minified — read it.</p>
+  </footer>
+</div>
+</body>
+</html>

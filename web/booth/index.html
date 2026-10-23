@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Booth · MUMBOOTH</title>
+<meta name="description" content="The MUMBOOTH app: chat with blind coupons, buy coupons with ETH on Robinhood Chain, export or forget everything.">
+<meta name="theme-color" content="#F3EEE4">
+<link rel="canonical" href="https://mumbooth.chat/booth/">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MUMBOOTH">
+<meta property="og:url" content="https://mumbooth.chat/booth/">
+<meta property="og:title" content="MUMBOOTH booth — chat as nobody">
+<meta property="og:description" content="Private AI chat paid with blind-signed coupons. No account. History stays in your browser.">
+<meta property="og:image" content="https://mumbooth.chat/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mumbooth.chat/og.jpg">
+<link rel="stylesheet" href="/css/style.css">
+<script type="module" src="/js/booth.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="roll">
+  <header class="mast">
+    <a class="wordmark" href="/" aria-label="MUMBOOTH home">
+      <img src="/assets/logo-128.png" width="26" height="26" alt="" aria-hidden="true">
+      Mumbooth
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="/booth/" aria-current="page">Booth</a>
+      <a href="/docs/">Docs</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/proof/">Proof</a>
+      <span class="nav-socials"><a class="nav-soc" data-x hidden href="#" aria-label="MUMBOOTH on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4zm-1.2 17.9h1.9L7.1 4.2H5.1z"/></svg><span>X</span></a><a class="nav-soc" data-tg hidden href="#" aria-label="MUMBOOTH on Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.9 3.6 18.6 19.9c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6 13.4l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 2.9c.9-.3 1.7.2 1.4.7z"/></svg><span>Telegram</span></a></span>
+    </nav>
+  </header>
+
+  <div id="banners"></div>
+
+  <main id="main" class="app">
+    <nav class="tabs" role="tablist" aria-label="Booth sections">
+      <a href="#chat" role="tab" id="tab-chat" aria-controls="panel-chat">Chat</a>
+      <a href="#coupons" role="tab" id="tab-coupons" aria-controls="panel-coupons">Coupons<span class="badge" data-usable>0</span></a>
+      <a href="#buy" role="tab" id="tab-buy" aria-controls="panel-buy">Buy</a>
+      <a href="#forget" role="tab" id="tab-forget" aria-controls="panel-forget">Forget</a>
+    </nav>
+
+    <!-- CHAT -->
+    <section class="panel" id="panel-chat" role="tabpanel" aria-labelledby="tab-chat">
+      <div class="booth-chat">
+        <aside class="booths" aria-label="Your booths">
+          <h3><span>Booths</span><button class="btn sm" type="button" id="new-booth">New</button></h3>
+          <ul id="booth-list"></ul>
+          <p class="none small">Saved in this browser only.</p>
+        </aside>
+        <div id="chat"></div>
+      </div>
+    </section>
+
+    <!-- COUPONS -->
+    <section class="panel" id="panel-coupons" role="tabpanel" aria-labelledby="tab-coupons" hidden>
+      <div class="sec-head"><span class="no">§C</span><span>Your coupons</span><span class="rule"></span><span class="tot" data-key-line></span></div>
+      <div class="wallet-sum">
+        <div class="cell"><div class="k">Usable here</div><div class="v" data-usable>0</div></div>
+        <div class="cell"><div class="k">Spent here</div><div class="v" data-spent-here>0</div></div>
+        <div class="cell"><div class="k">Fast messages</div><div class="v" data-fast-left>0</div></div>
+        <div class="cell"><div class="k">Deep messages</div><div class="v" data-deep-left>0</div></div>
+      </div>
+      <p class="notice"><strong>Anonymity set.</strong> <span data-anon-line>Loading…</span> Your coupons hide among these. Few coupons means a small crowd — keep that in mind.</p>
+      <p class="notice warn"><strong>Coupons live in this browser only.</strong> Clearing site data or closing a private window deletes them. Export a backup file — and treat it like cash: anyone with the file can spend them.</p>
+      <div class="row-btns">
+        <button class="btn" type="button" id="export-btn">Export coupons</button>
+        <label class="btn ghost" for="import-file">Import file</label>
+        <input class="sr-only" type="file" id="import-file" accept="application/json,.json">
+        <button class="linkbtn small" type="button" id="clear-spent">Clear spent receipts</button>
+      </div>
+      <p class="small" id="coupon-msg" role="status"></p>
+      <div class="tickets" id="tickets"></div>
+      <p class="more" id="tickets-more"></p>
+    </section>
+
+    <!-- BUY -->
+    <section class="panel" id="panel-buy" role="tabpanel" aria-labelledby="tab-buy" hidden>
+      <div id="pending-list"></div>
+      <div class="subtabs" id="buy-subtabs" role="group" aria-label="Payment method"></div>
+      <div class="buy-grid">
+        <div id="buy-form"></div>
+        <aside>
+          <ol class="progress" id="progress" aria-live="polite"></ol>
+          <div id="buy-result" aria-live="polite"></div>
+          <div class="notice small">
+            <strong>What happens to your wallet.</strong> It sends one public payment and signs one claim message. After the coupons arrive it is never asked for anything again. Buying and chatting right away can be correlated by timing — coupons are valid until <b data-redeem-until>the key’s end date</b>, so use them later if you want distance.
+          </div>
+          <p class="small muted">Wallet: any injected EIP-1193 wallet (MetaMask, Rabby, a wallet app’s built-in browser). Regular accounts only — smart-contract wallets can’t sign the claim.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FORGET -->
+    <section class="panel" id="panel-forget" role="tabpanel" aria-labelledby="tab-forget" hidden>
+      <div class="doc">
+        <h2>Forget</h2>
+        <p>Our server keeps no chat history, so there is nothing to delete on our side. Everything below lives in this browser’s storage, as plain, readable data.</p>
+        <h3>Forget this booth</h3>
+        <p>Deletes the open conversation from this browser. <span class="muted" data-current-booth></span></p>
+        <button class="btn ghost" type="button" id="forget-booth">Forget this booth</button>
+        <h3>Forget everything</h3>
+        <p>Deletes every conversation, every coupon and any unfinished purchase from this browser. Unspent coupons are gone for good unless you exported them.</p>
+        <div class="row-btns">
+          <button class="btn ghost" type="button" id="forget-export">Export coupons first</button>
+          <button class="btn red" type="button" id="forget-all">Forget everything</button>
+        </div>
+        <p class="small" id="forget-msg" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <div class="perf" role="presentation"></div>
+  <footer class="foot">
+    <img class="foot-mark" src="/assets/mammoth-stamp-160.webp" width="160" height="153" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <div class="thanks">Keep mum.</div>
+    <nav aria-label="Footer"><a href="/">Home</a><a href="/docs/">Docs</a><a href="/privacy/">Privacy</a><a href="/proof/">Proof</a><a data-x hidden href="#">X</a><a data-tg hidden href="#">Telegram</a></nav>
+    <p>No account. No cookies. The browser code is not minified — read it.</p>
+  </footer>
+</div>
+</body>
+</html>
