@@ -41,6 +41,14 @@ test('status: after the CA, token fields + burnedWei appear', async (t) => {
   assert.equal(r.body.burnedWei, '12345');
 });
 
+test('status: burns to 0x0 (lower totalSupply) count as burned too', async (t) => {
+  const s = await setup({ env: { TOKENS_PER_COUPON: '1000', HOLD_MIN: '1000000' }, token: TOKEN }); t.after(() => s.close());
+  s.rpc.setTokenBalance(TOKEN, DEAD, 100n);
+  s.rpc.setSupply(10n ** 27n - 2_000n);
+  const r = await s.call('GET', '/api/status');
+  assert.equal(r.body.burnedWei, '2100');
+});
+
 test('status: chain reads are memoised for statusTtlMs', async (t) => {
   const s = await setup(); t.after(() => s.close());
   s.config.statusTtlMs = 15_000;

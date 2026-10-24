@@ -12,7 +12,8 @@ async function chainNumbers(ctx) {
       const tok = ctx.token();
       const eth = await rpc.getBalance(config.treasury);
       let burned = null;
-      if (tok.address) burned = await rpc.tokenBalance(tok.address, DEAD);
+      // burned = sent to 0x…dEaD + destroyed outright (Pons tokens start at 1e9 × 1e18; a burn to 0x0 lowers totalSupply)
+      if (tok.address) burned = (await rpc.tokenBalance(tok.address, DEAD)) + (config.initialSupplyWei - (await rpc.tokenSupply(tok.address)));
       v = { ethReceivedWei: eth.toString(), burnedWei: burned === null ? null : burned.toString(), rpc: 'ok' };
     } catch (e) {
       if (!(e instanceof RpcError)) ctx.logEvent('status_error', {});

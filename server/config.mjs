@@ -35,6 +35,7 @@ export function loadConfig(env = process.env) {
     trialDailyCap: num(env.TRIAL_DAILY_CAP, 1500),
     anthropicKey: env.ANTHROPIC_API_KEY || '',
     openrouterKey: env.OPENROUTER_API_KEY || '',
+    initialSupplyWei: BigInt(env.INITIAL_SUPPLY_WEI || '1000000000000000000000000000'),
     currentKey: env.CURRENT_KEY || 'k1',
     issueDays: 30,
     redeemDays: 60,
