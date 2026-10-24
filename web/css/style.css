@@ -770,3 +770,6 @@ html.rv-on .card.rv.in:hover { transform: translateY(-3px); }
 @media (max-width: 760px) { .sheet .ledger td:first-child { width: 100%; } }
 /* booth on phones: the conversation first, the list of booths under it */
 @media (max-width: 899px) { .booth-chat > #chat { order: -1; } }
+
+/* burned total can be 9+ digits: keep it on one line */
+.cell .v[data-stat="burned"] { white-space: nowrap; font-size: clamp(1.15rem, 2.1vw, 2rem); }
